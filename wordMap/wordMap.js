@@ -4,7 +4,7 @@ var fontMaxSize = 100;
 var stopwords = ["and", "the", "with", "for", "to", "of", "in", "from", "a", "can", "but", "get", "an", "so",
  "are", "has", "is", "or", "it"];
 
-d3.json("app/wordMap.json", function (data) {
+d3.json("wordMap.json", function (data) {
     /**
      * http://stackoverflow.com/questions/16244857/d3-js-data-filtering
      */
@@ -33,6 +33,7 @@ function wordMap(data) {
         .style("color",function(d, i) {
             return fill(i);
         })
+        .style("font-family", "Impact, sans-serif")
         .text(function (d, i) {
             return d.word;
         });
