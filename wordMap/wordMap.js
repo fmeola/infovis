@@ -26,7 +26,7 @@ function wordMap(data) {
         .selectAll()
         .data(data)
         .enter()
-        .append("p")
+        .append("text")
         .style("font-size", function (d, i) {
             return scale(d.count) + "px";
         })
@@ -34,6 +34,7 @@ function wordMap(data) {
             return fill(i);
         })
         .style("font-family", "Impact, sans-serif")
+        .style("display", "inline-block")
         .text(function (d, i) {
             return d.word;
         });
