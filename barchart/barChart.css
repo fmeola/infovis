@@ -1,0 +1,24 @@
+.chart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+text.legend {
+    fill: black;
+    font: 10px sans-serif;
+    text-anchor: start;
+}
+
+rect.agree {
+    fill: green;
+}
+
+rect.disagree {
+    fill: red;
+}
+
+rect.neutral {
+    fill: steelblue;
+}
+

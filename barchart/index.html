@@ -1,105 +1,12 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-    .chart rect {
-        fill: steelblue;
-    }
-
-    .chart text {
-        fill: white;
-        font: 10px sans-serif;
-        text-anchor: end;
-    }
-
-</style>
-<svg class="chart"></svg>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script>
-
-    /**
-     * https://bl.ocks.org/mbostock/7341714
-     */
-    var width = 500,
-            barHeight = 20;
-
-    var x = d3.scale.linear()
-            .range([0, width]);
-
-    var chart = d3.select(".chart")
-            .attr("width", width * 2);
-
-    d3.tsv("data.tsv", type, function(error, data) {
-        x.domain([0, d3.max(data, function(d) { return 100; })]);
-
-        chart.attr("height", barHeight * data.length);
-
-        var bar = chart.selectAll("g")
-                .data(data)
-                .enter().append("g")
-                .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-
-        /**
-         * Agree
-         */
-        bar.append("rect")
-                .attr("width", function(d) { return x(d.agree); })
-                .attr("height", barHeight - 1)
-                .style("fill", "green")
-                .attr("x", function(d) { return x(0); });
-
-        bar.append("text")
-                .attr("x", function(d) { return x(d.agree) - 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.agree; });
-
-        /**
-         * Disagree
-         */
-        bar.append("rect")
-                .attr("width", function(d) { return x(d.disagree); })
-                .attr("height", barHeight - 1)
-                .style("fill", "red")
-                .attr("x", function(d) { return x(d.agree); });
-
-        bar.append("text")
-                .attr("x", function(d) { return x(d.disagree) + x(d.agree) - 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.disagree; });
-
-        /**
-         * Neutral
-         */
-        bar.append("rect")
-                .attr("width", function(d) { return x(d.neutral); })
-                .attr("height", barHeight - 1)
-                .style("fill", "blue")
-                .attr("x", function(d) { return x(d.disagree) + x(d.agree); });
-
-        bar.append("text")
-                .attr("x", function(d) { return x(d.disagree) + x(d.agree) + x(d.neutral) - 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.neutral; });
-
-        /**
-         * Leyendas
-         */
-        bar.append("text")
-                .attr("x", function(d) { return x(d.disagree) + x(d.agree) + x(d.neutral) + 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.name; })
-                .style("fill", "black")
-                .style("text-anchor","start");
-
-    });
-
-    function type(d) {
-        d.value = +d.value; // coerce to number
-        return d;
-    }
-
-</script>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="barChart.css">
+</head>
+<body>
+    <svg class="chart"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js"></script>
+    <script src="barChart.js"></script>
+</body>
+</html>
