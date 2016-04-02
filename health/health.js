@@ -7,9 +7,9 @@ var distanceChart = c3.generate({
         url: 'data/distanceWalkingRunning.csv',
         x: 'date',
         y: 'value',
-        xFormat: '%Y-%m-%d %H:%M:%S %Z',
+        xFormat: '%Y-%m-%d',
         names: {
-            value: 'Kms de caminata y trote'
+            value: 'Caminata y trote'
         },
         type: 'bar'
     },
@@ -21,7 +21,7 @@ var distanceChart = c3.generate({
             type: 'timeseries',
             tick: {
                 culling: true,
-                format: '%d/%m/%Y %H:%M'
+                format: '%d/%m'
             },
             label: {
                 text: 'Fecha'
@@ -29,7 +29,7 @@ var distanceChart = c3.generate({
         },
         y: {
             label: {
-                text: 'Kms de caminata y trote'
+                text: 'Kms'
             }
         }
     },
@@ -46,6 +46,13 @@ var distanceChart = c3.generate({
     },
     subchart: {
         show: true
+    },
+    tooltip: {
+        format: {
+            value: function (value, ratio, id) {
+                return d3.format('.2f')(value) + ' Kms';
+            }
+        }
     }
 });
 
@@ -55,7 +62,7 @@ var flightsClimbedChart = c3.generate({
         url: 'data/flightsClimbed.csv',
         x: 'date',
         y: 'value',
-        xFormat: '%Y-%m-%d %H:%M:%S %Z',
+        xFormat: '%Y-%m-%d',
         names: {
             value: 'Pisos Subidos'
         },
@@ -69,7 +76,7 @@ var flightsClimbedChart = c3.generate({
             type: 'timeseries',
             tick: {
                 culling: true,
-                format: '%d/%m/%Y %H:%M'
+                format: '%d/%m'
             },
             label: {
                 text: 'Fecha'
@@ -77,8 +84,7 @@ var flightsClimbedChart = c3.generate({
         },
         y: {
             tick: {
-                culling: true,
-                values: [0,1,2,3,4,5]
+                culling: true
             },
             label: {
                 text: 'Pisos Subidos'
@@ -111,7 +117,7 @@ var stepCountChart = c3.generate({
         url: 'data/stepCount.csv',
         x: 'date',
         y: 'value',
-        xFormat: '%Y-%m-%d %H:%M:%S %Z',
+        xFormat: '%Y-%m-%d',
         names: {
             value: 'Pasos'
         },
@@ -125,7 +131,7 @@ var stepCountChart = c3.generate({
             type: 'timeseries',
             tick: {
                 culling: true,
-                format: '%d/%m/%Y %H:%M'
+                format: '%d/%m'
             },
             label: {
                 text: 'Fecha'
