@@ -1,0 +1,73 @@
+[ {
+  "prov" : "2",
+  "nomProv" : "Ciudad AutÃ³noma de Buenos Aires"
+}, {
+  "prov" : "6",
+  "nomProv" : "Buenos Aires"
+}, {
+  "prov" : "10",
+  "nomProv" : "Catamarca"
+}, {
+  "prov" : "14",
+  "nomProv" : "CÃ³rdoba"
+}, {
+  "prov" : "18",
+  "nomProv" : "Corrientes"
+}, {
+  "prov" : "22",
+  "nomProv" : "Chaco"
+}, {
+  "prov" : "26",
+  "nomProv" : "Chubut"
+}, {
+  "prov" : "30",
+  "nomProv" : "Entre RÃ­os"
+}, {
+  "prov" : "34",
+  "nomProv" : "Formosa"
+}, {
+  "prov" : "38",
+  "nomProv" : "Jujuy"
+}, {
+  "prov" : "42",
+  "nomProv" : "La Pampa"
+}, {
+  "prov" : "46",
+  "nomProv" : "La Rioja"
+}, {
+  "prov" : "50",
+  "nomProv" : "Mendoza"
+}, {
+  "prov" : "54",
+  "nomProv" : "Misiones"
+}, {
+  "prov" : "58",
+  "nomProv" : "NeuquÃ©n"
+}, {
+  "prov" : "62",
+  "nomProv" : "RÃ­o negro"
+}, {
+  "prov" : "66",
+  "nomProv" : "Salta"
+}, {
+  "prov" : "70",
+  "nomProv" : "San Juan"
+}, {
+  "prov" : "74",
+  "nomProv" : "San Luis"
+}, {
+  "prov" : "78",
+  "nomProv" : "Santa Cruz"
+}, {
+  "prov" : "82",
+  "nomProv" : "Santa Fe"
+}, {
+  "prov" : "86",
+  "nomProv" : "Santiago del Estero"
+}, {
+  "prov" : "90",
+  "nomProv" : "TucumÃ¡n"
+}, {
+  "prov" : "94",
+  "nomProv" : "Tierra del Fuego"
+} ]
