@@ -8,6 +8,9 @@ d3.json("gender.json", function (data) {
             ],
             type : 'pie'
         },
+        color: {
+            pattern: ['#FF6B84', '#5AAEFF']
+        },
         tooltip: {
             format: {
                 value: function (value, ratio, id) {
