@@ -56,6 +56,54 @@ var distanceChart = c3.generate({
     }
 });
 
+var distanceChartByDay = c3.generate({
+    bindto: '#distanceChartByDay',
+    data: {
+        x: 'x',
+        columns: [
+            ['x', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            ['value', 187.19, 162.37, 177.62, 217.12, 251.79, 203.64, 191.20]
+        ],
+        type: 'bar'
+    },
+    axis: {
+        rotated: true,
+        x: {
+            type: 'category'
+        }
+    },
+    tooltip: {
+        grouped: false
+    },
+    legend: {
+        show: false
+    }
+});
+
+var flightsClimbedChartByDay = c3.generate({
+    bindto: '#flightsClimbedChartByDay',
+    data: {
+        x: 'x',
+        columns: [
+            ['x', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            ['value', 204, 179, 184, 192, 233, 241, 147]
+        ],
+        type: 'bar'
+    },
+    axis: {
+        rotated: true,
+        x: {
+            type: 'category'
+        }
+    },
+    tooltip: {
+        grouped: false
+    },
+    legend: {
+        show: false
+    }
+});
+
 var flightsClimbedChart = c3.generate({
     bindto: '#flightsClimbedChart',
     data: {
