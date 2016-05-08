@@ -2,39 +2,170 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
     <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css">
+    <link rel="stylesheet" href="health.css">
 </head>
 <body>
-    <div class="container">
-        <h1><img src="icon.png" alt="logo" width="50" height="50"/> Apple Health Data Visualization</h1>
-        <div class="well well-lg">
-            <h2>Distancia de caminata + trote</h2>
-            <div id="distanceChart"></div>
-        </div>
-        <div class="containerrow">
-            <div class="col-xs-6 well">
-                <h2 class="panel-title">Pisos Subidos</h2>
-                <div id="flightsClimbedChart"></div>
+    <div class="container main-container">
+        <h1><img src="images/icon.png" alt="logo" width="50" height="50"/> Visualización de datos de la aplicación Salud del iPhone</h1>
+        <p></p>
+        <blockquote>
+            <p>Resumen de 1 año de datos (Del <b>01/04/2015</b> al <b>31/03/2016</b>).</p>
+        </blockquote>
+        <!-- Distancia Recorrida -->
+        <div class="container">
+            <div class="container secondary-container">
+                <h2>Total distancia de caminata y trote</h2>
+                <div id="distanceChart"></div>
             </div>
-            <div class="col-xs-6 well">
-                <h2 class="panel-title">Pasos</h2>
+        </div>
+        <div class="container secondary-container">
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-silhouette-walking-with-suitcase.png" alt="logo" width="50" height="50"/>  1,305 Kms</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Total anual</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-silhouette-walking-with-suitcase.png" alt="logo" width="50" height="50"/>  3.5 Kms</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Promedio diario</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-silhouette-walking-with-suitcase.png" alt="logo" width="50" height="50"/>  12 Kms
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Marca diaria máxima (07/01/2016)</div>
+                </div>
+            </div>
+        </div>
+        <div class="container secondary-container">
+            <div class="col-xs-6">
+                <h2 class="panel-title">Promedio por día de la semana (Kms)</h2>
+                <div id="distanceChartByDay"></div>
+            </div>
+            <div class="col-xs-6">
+                <h2 class="panel-title">Promedio por momento del día (Kms)</h2>
+                <div id="distanceChartByMoment"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pasos -->
+    <div class="container main-container">
+        <div class="container secondary-container">
+            <div class="container">
+                <h2>Total de pasos</h2>
                 <div id="stepCountChart"></div>
             </div>
         </div>
-        <div class="containerrow">
-            <div class="col-xs-6 well">
-                <h2 class="panel-title">Distancia Por Dia</h2>
-                <div id="distanceChartByDay"></div>
+        <div class="container secondary-container">
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/footsteps-silhouette-variant.png" alt="logo" width="50" height="50"/>  1,703,235 Pasos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Total anual</div>
+                </div>
             </div>
-            <div class="col-xs-6 well">
-                <h2 class="panel-title">Pisos Por Dia</h2>
-                <div id="flightsClimbedChartByDay"></div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/footsteps-silhouette-variant.png" alt="logo" width="50" height="50"/>  4666 Pasos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Promedio diario</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/footsteps-silhouette-variant.png" alt="logo" width="50" height="50"/>  16,873 Pasos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Marca diaria máxima (07/01/2016)</div>
+                </div>
             </div>
         </div>
-        <footer><p>Franco Román Meola :: Visualización de Información :: 2016</p></footer>
+    </div>
+    <!-- Pisos Subidos -->
+    <div class="container main-container">
+        <div class="container secondary-container">
+            <div class="container">
+                <h2>Total de pisos subidos</h2>
+                <div id="flightsClimbedChart"></div>
+            </div>
+        </div>
+        <div class="container secondary-container">
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-ascending-by-stair-steps.png" alt="logo" width="50" height="50"/>  1,565 Pisos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Total anual</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-ascending-by-stair-steps.png" alt="logo" width="50" height="50"/>  5 Pisos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Promedio diario</div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="text-center">
+                            <img src="images/businessman-ascending-by-stair-steps.png" alt="logo" width="50" height="50"/>  28 Pisos</i>
+                        </h3>
+                    </div>
+                    <div class="panel-footer text-center">Marca diaria máxima (02/03/2016)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <blockquote>
+            <p><b>Herramientas utilizadas:</b></p>
+            <ul>
+                <li><a href="http://ericwolter.com/projects/health-export.html">Apple Health XML to CSV Converter</a></li>
+                <li><a href="http://openrefine.org">Open Refine</a></li>
+                <li><a href="https://d3js.org">d3.js</a></li>
+                <li><a href="http://c3js.org">c3.js</a></li>
+            </ul>
+        </blockquote>
+        <blockquote>
+            <p><b><a href="https://github.com/fmeola">Franco Román Meola</a></b></p>
+            <p><b>Trabajo Práctico Datos Personales</b></p>
+            <p>Visualización de Información</p>
+            <p>2016</p>
+        </blockquote>
+        <div class="container">
+            Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </div>
     </div>
     <script src="health.js"></script>
 </body>
