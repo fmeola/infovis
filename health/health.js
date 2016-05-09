@@ -2,46 +2,81 @@
  * http://bl.ocks.org/aaizemberg/03f518eee62b22d7f4c5
  */
 
-var defaultColor = '#F1AF4A';
-var starredColor = '#4DAF4A';
+/**
+ * Chart
+ */
+var chartStyle = {
+    defaultColor: '#F1AF4A',
+    starredColor: '#4DAF4A',
+    xLabelPosition: 'outer-center',
+    yLabelPosition: 'outer-middle',
+    xAxisType: 'timeseries',
+    xLabelName: 'Fecha',
+    dataType: 'bar'
+};
+
+/**
+ * Input
+ */
+var inputMeta = {
+    xColumn: 'startDate',
+    yColumn: 'value',
+    dateFormat: '%Y-%m-%d'
+};
+
+/**
+ * Localization
+ */
+var locale = {
+    date: "%d/%m/%Y",
+    days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+};
+var dateFormat = d3.time.format(locale.date);
+
+function decimalFormat(n) {
+    return d3.format(",.2f")(n).replace('.', ' ').replace(/,/g, '.').replace(' ', ',');
+}
+
+function intFormat(n) {
+    return d3.format(",.0f")(n).replace('.', ' ').replace(/,/g, '.');
+}
 
 /**
  * Kms recorridos
  */
-var distanceChart = c3.generate({
+var distanceunit = 'Kms';
+
+c3.generate({
     bindto: '#distanceChart',
     data: {
         url: 'data/Distance15-16.csv',
-        x: 'startDate',
-        y: 'value',
-        xFormat: '%Y-%m-%d',
+        x: inputMeta.xColumn,
+        y: inputMeta.yColumn,
+        xFormat: inputMeta.dateFormat,
         names: {
             value: 'Caminata y trote'
         },
-        type: 'bar',
-        //TODO Mejorar la manera de ubicar destaques de puntos
+        type: chartStyle.dataType,
+        //TODO Encontar la manera de ubicar el array de data.
         color: function(inColor, data) {
-            if(data.value === 12.007120840000004) {
-                return starredColor;
-            }
-            return defaultColor;
+            return highlightVal(data, 12.007120840000004);
         }
     },
     axis: {
         x: {
-            type: 'timeseries',
+            type: chartStyle.xAxisType,
             tick: {
-                format: '%d/%m'
+                format: locale.date
             },
             label: {
-                text: 'Fecha',
-                position: 'outer-center'
+                text: chartStyle.xLabelName,
+                position: chartStyle.xLabelPosition
             }
         },
         y: {
             label: {
-                text: 'Kms',
-                position: 'outer-middle'
+                text: distanceunit,
+                position: chartStyle.yLabelPosition
             }
         }
     },
@@ -57,11 +92,10 @@ var distanceChart = c3.generate({
              * https://github.com/mbostock/d3/wiki/Time-Formatting
              */
             title: function (d) {
-                var format = d3.time.format("%d/%m/%Y");
-                return format(d);
+                return dateFormat(d);
             },
-            value: function (value, ratio, id) {
-                return d3.format('.2f')(value) + ' Kms';
+            value: function (value) {
+                return decimalFormat(value) + ' ' + distanceunit;
             }
         }
     }
@@ -70,28 +104,29 @@ var distanceChart = c3.generate({
 /**
  * Kms por día de la semana.
  */
-var daysOfTheWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 var avgByDay = [3.44, 3.37, 3.59, 3.78, 3.88, 3.47, 3.40];
 
-var distanceChartByDay = c3.generate({
+c3.generate({
     bindto: '#distanceChartByDay',
     data: {
         x: 'x',
         columns: [
-            ['x'].concat(daysOfTheWeek),
+            ['x'].concat(locale.days),
             ['value'].concat(avgByDay)
         ],
-        type: 'bar',
+        type: chartStyle.dataType,
         labels: {
             format: {
-                value: d3.format()
+                value: function(value) {
+                    return decimalFormat(value)
+                }
             }
         },
         color: function(inColor, data) {
             if(data.index === indexOfMax(avgByDay)) {
-                return starredColor;
+                return chartStyle.starredColor;
             }
-            return defaultColor;
+            return chartStyle.defaultColor;
         }
     },
     axis: {
@@ -117,7 +152,7 @@ var distanceChartByDay = c3.generate({
 var partsOfDay = ['Mañana', 'Tarde', 'Noche'];
 var avgByPartOfDay = [1.11, 1.73, 0.74];
 
-var distanceChartByMoment = c3.generate({
+c3.generate({
     bindto: '#distanceChartByMoment',
     data: {
         x: 'x',
@@ -125,17 +160,19 @@ var distanceChartByMoment = c3.generate({
             ['x'].concat(partsOfDay),
             ['value'].concat(avgByPartOfDay)
         ],
-        type: 'bar',
+        type: chartStyle.dataType,
         labels: {
             format: {
-                value: d3.format()
+                value: function(value) {
+                    return decimalFormat(value)
+                }
             }
         },
         color: function(inColor, data) {
             if(data.index === indexOfMax(avgByPartOfDay)) {
-                return starredColor;
+                return chartStyle.starredColor;
             }
-            return defaultColor;
+            return chartStyle.defaultColor;
         }
     },
     axis: {
@@ -158,43 +195,41 @@ var distanceChartByMoment = c3.generate({
 /**
  * Pasos
  */
-var stepCountChart = c3.generate({
+var stepUnit = 'Pasos';
+
+c3.generate({
     bindto: '#stepCountChart',
     data: {
         url: 'data/stepCount15-16.csv',
-        x: 'startDate',
-        y: 'value',
-        xFormat: '%Y-%m-%d',
+        x: inputMeta.xColumn,
+        y: inputMeta.yColumn,
+        xFormat: inputMeta.dateFormat,
         names: {
-            value: 'Pasos'
+            value: stepUnit
         },
-        type: 'bar',
+        type: chartStyle.dataType,
         color: function(inColor, data) {
-            if(data.value === 16873) {
-                return starredColor;
-            }
-            return defaultColor;
-        }
-    },
+            return highlightVal(data, 16873);
+        }    },
     axis: {
         x: {
-            type: 'timeseries',
+            type: chartStyle.xAxisType,
             tick: {
-                format: '%d/%m'
+                format: locale.date
             },
             label: {
-                text: 'Fecha',
-                position: 'outer-center'
+                text: chartStyle.xLabelName,
+                position: chartStyle.xLabelPosition
             }
         },
         y: {
             label: {
-                text: 'Pasos',
-                position: 'outer-middle'
+                text: stepUnit,
+                position: chartStyle.yLabelPosition
             },
             tick: {
                 format: function (data) {
-                    return d3.format(',')(data);
+                    return intFormat(data);
                 }
             }
         }
@@ -207,15 +242,11 @@ var stepCountChart = c3.generate({
     },
     tooltip: {
         format: {
-            /**
-             * https://github.com/mbostock/d3/wiki/Time-Formatting
-             */
             title: function (d) {
-                var format = d3.time.format("%d/%m/%Y");
-                return format(d);
+                return dateFormat(d);
             },
-            value: function (value, ratio, id) {
-                return d3.format(',')(value);
+            value: function (value) {
+                return intFormat(value);
             }
         }
     }
@@ -224,40 +255,38 @@ var stepCountChart = c3.generate({
 /**
  * Pisos Subidos
  */
-var flightsClimbedChart = c3.generate({
+var flightsUnit = 'Pisos subidos';
+
+c3.generate({
     bindto: '#flightsClimbedChart',
     data: {
         url: 'data/flightsClimbed15-16.csv',
-        x: 'startDate',
-        y: 'value',
-        xFormat: '%Y-%m-%d',
+        x: inputMeta.xColumn,
+        y: inputMeta.yColumn,
+        xFormat: inputMeta.dateFormat,
         names: {
-            value: 'Pisos Subidos'
+            value: flightsUnit
         },
-        type: 'bar',
-        //TODO Mejorar la manera de ubicar destaques de puntos
+        type: chartStyle.dataType,
         color: function(inColor, data) {
-            if(data.value === 28) {
-                return starredColor;
-            }
-            return defaultColor;
+            return highlightVal(data, 28);
         }
     },
     axis: {
         x: {
-            type: 'timeseries',
+            type: chartStyle.xAxisType,
             tick: {
-                format: '%d/%m'
+                format: locale.date
             },
             label: {
-                text: 'Fecha',
-                position: 'outer-center'
+                text: chartStyle.xLabelName,
+                position: chartStyle.xLabelPosition
             }
         },
         y: {
             label: {
-                text: 'Pisos Subidos',
-                position: 'outer-middle'
+                text: flightsUnit,
+                position: chartStyle.yLabelPosition
             }
         }
     },
@@ -269,19 +298,22 @@ var flightsClimbedChart = c3.generate({
     },
     tooltip: {
         format: {
-            /**
-             * https://github.com/mbostock/d3/wiki/Time-Formatting
-             */
             title: function (d) {
-                var format = d3.time.format("%d/%m/%Y");
-                return format(d);
+                return dateFormat(d);
             },
-            value: function (value, ratio, id) {
-                return d3.format(',')(value);
+            value: function (value) {
+                return intFormat(value);
             }
         }
     }
 });
+
+function highlightVal(data, val) {
+    if(data.value === val) {
+        return chartStyle.starredColor;
+    }
+    return chartStyle.defaultColor;
+}
 
 /**
  * http://stackoverflow.com/questions/11301438/return-index-of-greatest-value-in-an-array
